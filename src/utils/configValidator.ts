@@ -1,45 +1,87 @@
-import { z } from 'zod';
+import { LayoutConfig } from '../types/config';
 
-const themeSchema = z.object({
-  primary: z.string(),
-  secondary: z.string(),
-  background: z.string(),
-  surface: z.string(),
-  textPrimary: z.string(),
-  textSecondary: z.string(),
-  accent: z.string(),
-  festival: z.object({
-    name: z.string(),
-    greeting: z.string(),
-    bannerImageUrl: z.string(),
-  }),
-});
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
 
-const tabSchema = z.object({
-  id: z.string(),
-  label: z.string(),
-  icon: z.string(),
-  screen: z.enum(['home', 'bookings', 'prescriptions', 'profile']),
-});
+function isThemeConfig(value: unknown): boolean {
+  if (!isObject(value)) {
+    return false;
+  }
 
-const sectionSchema = z.object({
-  id: z.string(),
-  type: z.string(),
-  background: z.object({
-    kind: z.enum(['color', 'gradient', 'image']),
-    value: z.string(),
-  }),
-  title: z.string(),
-  items: z.array(z.unknown()),
-});
+  const festival = value.festival;
 
-export const layoutConfigSchema = z.object({
-  version: z.number(),
-  theme: themeSchema,
-  tabs: z.array(tabSchema),
-  sections: z.array(sectionSchema),
-});
+  if (!isObject(festival)) {
+    return false;
+  }
 
-export function validateLayoutConfig(data: unknown) {
-  return layoutConfigSchema.safeParse(data);
+  return (
+    typeof value.primary === 'string' &&
+    typeof value.secondary === 'string' &&
+    typeof value.background === 'string' &&
+    typeof value.surface === 'string' &&
+    typeof value.textPrimary === 'string' &&
+    typeof value.textSecondary === 'string' &&
+    typeof value.accent === 'string' &&
+    typeof festival.name === 'string' &&
+    typeof festival.greeting === 'string' &&
+    typeof festival.bannerImageUrl === 'string'
+  );
+}
+
+function isTabConfig(value: unknown): boolean {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.id === 'string' &&
+    typeof value.label === 'string' &&
+    typeof value.icon === 'string' &&
+    (value.screen === 'home' ||
+      value.screen === 'bookings' ||
+      value.screen === 'prescriptions' ||
+      value.screen === 'profile')
+  );
+}
+
+function isSectionConfig(value: unknown): boolean {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  const background = value.background;
+
+  if (!isObject(background)) {
+    return false;
+  }
+
+  const validBackground =
+    background.kind === 'color' ||
+    background.kind === 'gradient' ||
+    background.kind === 'image';
+
+  return (
+    typeof value.id === 'string' &&
+    typeof value.type === 'string' &&
+    validBackground &&
+    typeof background.value === 'string' &&
+    typeof value.title === 'string' &&
+    Array.isArray(value.items)
+  );
+}
+
+export function isLayoutConfig(value: unknown): value is LayoutConfig {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.version === 'number' &&
+    isThemeConfig(value.theme) &&
+    Array.isArray(value.tabs) &&
+    value.tabs.every(isTabConfig) &&
+    Array.isArray(value.sections) &&
+    value.sections.every(isSectionConfig)
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import {
   ActivityIndicator,
@@ -18,11 +18,7 @@ import SectionRenderer from '../components/home/SectionRenderer';
 function HomeScreen() {
   const insets = useSafeAreaInsets();
 
-  const { config, isLoading, error, loadConfig } = useConfigStore();
-
-  useEffect(() => {
-    loadConfig();
-  }, [loadConfig]);
+  const { config, isLoading, error } = useConfigStore();
 
   if (isLoading) {
     return (

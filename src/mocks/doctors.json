@@ -1,0 +1,26 @@
+[
+  {
+    "id": "doctor-1",
+    "name": "Dr. Ananya Sharma",
+    "specialty": "General Physician",
+    "photoUrl": "https://i.pravatar.cc/300?img=47",
+    "feeInr": 499,
+    "languages": ["English", "Hindi"]
+  },
+  {
+    "id": "doctor-2",
+    "name": "Dr. Rahul Mehta",
+    "specialty": "Cardiologist",
+    "photoUrl": "https://i.pravatar.cc/300?img=12",
+    "feeInr": 799,
+    "languages": ["English", "Hindi"]
+  },
+  {
+    "id": "doctor-3",
+    "name": "Dr. Priya Kapoor",
+    "specialty": "Dermatologist",
+    "photoUrl": "https://i.pravatar.cc/300?img=32",
+    "feeInr": 699,
+    "languages": ["English", "Hindi"]
+  }
+]

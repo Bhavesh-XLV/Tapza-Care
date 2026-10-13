@@ -1,6 +1,16 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import { RootStackParamList } from '../../navigation/AppNavigator';
 import { LayoutSection } from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
 
@@ -16,6 +26,8 @@ interface QuickActionsProps {
 }
 
 function QuickActions({ section, theme }: QuickActionsProps) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const items = section.items as QuickActionItem[];
 
   return (
@@ -45,7 +57,15 @@ function QuickActions({ section, theme }: QuickActionsProps) {
           gap: theme.spacing.sm,
         }}
         renderItem={({ item }) => (
-          <View
+          <TouchableOpacity
+            activeOpacity={0.8}
+            accessibilityRole="button"
+            accessibilityLabel={item.label}
+            onPress={() => {
+              if (item.id === 'book') {
+                navigation.navigate('DoctorSelection');
+              }
+            }}
             style={[
               styles.action,
               {
@@ -89,7 +109,7 @@ function QuickActions({ section, theme }: QuickActionsProps) {
             >
               {item.label}
             </Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

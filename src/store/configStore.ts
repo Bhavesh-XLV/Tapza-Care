@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 import { LayoutConfig } from '../types/config';
 import { getConfig } from '../api/configApi';
+import { getConfigFromCache } from '../utils/configCache';
 
 interface ConfigState {
   config: LayoutConfig | null;
@@ -28,8 +29,21 @@ export const useConfigStore = create<ConfigState>(set => ({
       set({
         config,
         isLoading: false,
+        error: null,
       });
-    } catch (error) {
+    } catch {
+      const cachedConfig = await getConfigFromCache();
+
+      if (cachedConfig) {
+        set({
+          config: cachedConfig,
+          isLoading: false,
+          error: null,
+        });
+
+        return;
+      }
+
       set({
         isLoading: false,
         error: 'Unable to load configuration',

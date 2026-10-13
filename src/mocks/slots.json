@@ -1,0 +1,58 @@
+[
+  {
+    "id": "slot-1",
+    "doctorId": "doctor-1",
+    "startsAt": "2026-10-14T10:00:00+05:30",
+    "endsAt": "2026-10-14T10:30:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-2",
+    "doctorId": "doctor-1",
+    "startsAt": "2026-10-14T11:00:00+05:30",
+    "endsAt": "2026-10-14T11:30:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-3",
+    "doctorId": "doctor-1",
+    "startsAt": "2026-10-14T14:00:00+05:30",
+    "endsAt": "2026-10-14T14:30:00+05:30",
+    "available": false
+  },
+  {
+    "id": "slot-4",
+    "doctorId": "doctor-1",
+    "startsAt": "2026-10-15T10:30:00+05:30",
+    "endsAt": "2026-10-15T11:00:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-5",
+    "doctorId": "doctor-2",
+    "startsAt": "2026-10-14T09:00:00+05:30",
+    "endsAt": "2026-10-14T09:30:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-6",
+    "doctorId": "doctor-2",
+    "startsAt": "2026-10-14T12:00:00+05:30",
+    "endsAt": "2026-10-14T12:30:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-7",
+    "doctorId": "doctor-3",
+    "startsAt": "2026-10-14T15:00:00+05:30",
+    "endsAt": "2026-10-14T15:30:00+05:30",
+    "available": true
+  },
+  {
+    "id": "slot-8",
+    "doctorId": "doctor-3",
+    "startsAt": "2026-10-15T16:00:00+05:30",
+    "endsAt": "2026-10-15T16:30:00+05:30",
+    "available": true
+  }
+]
