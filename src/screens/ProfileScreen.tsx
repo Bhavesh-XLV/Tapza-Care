@@ -6,10 +6,12 @@ import { ConfigMode, getConfigMode, setConfigMode } from '../api/configApi';
 
 import { useConfigStore } from '../store/configStore';
 import { createTheme } from '../theme/createTheme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function ProfileScreen() {
   const config = useConfigStore(state => state.config);
   const loadConfig = useConfigStore(state => state.loadConfig);
+  const insets = useSafeAreaInsets();
 
   if (!config) {
     return null;
@@ -33,6 +35,9 @@ function ProfileScreen() {
         styles.container,
         {
           backgroundColor: theme.colors.background,
+          paddingTop: insets.top,
+
+          paddingBottom: insets.bottom,
         },
       ]}
     >
@@ -41,7 +46,7 @@ function ProfileScreen() {
           styles.title,
           {
             color: theme.colors.textPrimary,
-            fontSize: theme.typography.heading,
+            fontSize: theme.typography.title,
           },
         ]}
       >

@@ -138,7 +138,8 @@ function PrescriptionsScreen() {
         styles.container,
         {
           backgroundColor: theme.colors.background,
-          paddingTop: insets.top + theme.spacing.md,
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
         },
       ]}
     >

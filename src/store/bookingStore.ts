@@ -8,6 +8,7 @@ type BookingStatus = 'idle' | 'pending' | 'confirmed' | 'conflict' | 'error';
 interface BookingState {
   status: BookingStatus;
   booking: Booking | null;
+  bookings: Booking[];
   error: string | null;
 
   submitBooking: (doctorId: string, slot: Slot) => Promise<void>;
@@ -15,9 +16,10 @@ interface BookingState {
   resetBooking: () => void;
 }
 
-export const useBookingStore = create<BookingState>(set => ({
+export const useBookingStore = create<BookingState>((set, get) => ({
   status: 'idle',
   booking: null,
+  bookings: [],
   error: null,
 
   submitBooking: async (doctorId, slot) => {
@@ -44,6 +46,7 @@ export const useBookingStore = create<BookingState>(set => ({
       set({
         status: 'confirmed',
         booking,
+        bookings: [...get().bookings, booking],
         error: null,
       });
     } catch (error) {
