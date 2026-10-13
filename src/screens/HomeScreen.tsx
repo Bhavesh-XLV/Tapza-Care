@@ -10,6 +10,13 @@ import {
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import Animated, {
+  Extrapolation,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
+
 import { useConfigStore } from '../store/configStore';
 import { createTheme } from '../theme/createTheme';
 
@@ -17,6 +24,7 @@ import SectionRenderer from '../components/home/SectionRenderer';
 
 function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const scrollY = useSharedValue(0);
 
   const { config, isLoading, error } = useConfigStore();
 
@@ -38,6 +46,47 @@ function HomeScreen() {
 
   const theme = createTheme(config.theme);
 
+  const animatedHeaderStyle = useAnimatedStyle(() => {
+    const height = interpolate(
+      scrollY.value,
+      [0, 80],
+      [70, 48],
+      Extrapolation.CLAMP,
+    );
+
+    const opacity = interpolate(
+      scrollY.value,
+      [0, 60],
+      [1, 0.7],
+      Extrapolation.CLAMP,
+    );
+
+    return {
+      height,
+      opacity,
+    };
+  });
+
+  const animatedGreetingStyle = useAnimatedStyle(() => {
+    const translateY = interpolate(
+      scrollY.value,
+      [0, 80],
+      [0, -10],
+      Extrapolation.CLAMP,
+    );
+
+    const scale = interpolate(
+      scrollY.value,
+      [0, 80],
+      [1, 0.9],
+      Extrapolation.CLAMP,
+    );
+
+    return {
+      transform: [{ translateY }, { scale }],
+    };
+  });
+
   return (
     <View
       style={[
@@ -48,15 +97,11 @@ function HomeScreen() {
         },
       ]}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingBottom: insets.bottom + theme.spacing.xl,
-        }}
-      >
-        <Text
+      <Animated.View style={[styles.header, animatedHeaderStyle]}>
+        <Animated.Text
           style={[
             styles.greeting,
+            animatedGreetingStyle,
             {
               color: theme.colors.textPrimary,
               fontSize: theme.typography.body,
@@ -64,8 +109,19 @@ function HomeScreen() {
           ]}
         >
           {config.theme.festival.greeting}
-        </Text>
+        </Animated.Text>
+      </Animated.View>
 
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        onScroll={event => {
+          scrollY.value = event.nativeEvent.contentOffset.y;
+        }}
+        contentContainerStyle={{
+          paddingBottom: insets.bottom + theme.spacing.xl,
+        }}
+      >
         {config.sections.map(section => (
           <View
             key={section.id}
@@ -76,7 +132,7 @@ function HomeScreen() {
             <SectionRenderer section={section} theme={theme} />
           </View>
         ))}
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 }
@@ -91,6 +147,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  header: {
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 
   greeting: {
