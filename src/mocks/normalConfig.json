@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "theme": {
+    "primary": "#2563EB",
+    "secondary": "#E0F2FE",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "textPrimary": "#0F172A",
+    "textSecondary": "#64748B",
+    "accent": "#16A34A",
+    "festival": {
+      "name": "Normal Day",
+      "greeting": "Good morning",
+      "bannerImageUrl": ""
+    }
+  },
+  "tabs": [
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "home",
+      "screen": "home"
+    },
+    {
+      "id": "bookings",
+      "label": "Bookings",
+      "icon": "calendar",
+      "screen": "bookings"
+    },
+    {
+      "id": "prescriptions",
+      "label": "Prescriptions",
+      "icon": "file",
+      "screen": "prescriptions"
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "icon": "user",
+      "screen": "profile"
+    }
+  ],
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero_banner",
+      "background": {
+        "kind": "gradient",
+        "value": "#DBEAFE,#BFDBFE,#93C5FD"
+      },
+      "title": "Your health, simplified",
+      "items": []
+    },
+    {
+      "id": "categories",
+      "type": "category_chips",
+      "background": {
+        "kind": "color",
+        "value": "#F8FAFC"
+      },
+      "title": "What do you need?",
+      "items": [
+        {
+          "id": "consult",
+          "label": "Consult"
+        },
+        {
+          "id": "lab",
+          "label": "Lab Tests"
+        },
+        {
+          "id": "pharmacy",
+          "label": "Pharmacy"
+        },
+        {
+          "id": "vaccines",
+          "label": "Vaccines"
+        }
+      ]
+    },
+    {
+      "id": "quick-actions",
+      "type": "quick_actions",
+      "background": {
+        "kind": "color",
+        "value": "#F8FAFC"
+      },
+      "title": "Quick actions",
+      "items": [
+        {
+          "id": "book",
+          "label": "Book",
+          "icon": "📅"
+        },
+        {
+          "id": "prescriptions",
+          "label": "Prescriptions",
+          "icon": "📋"
+        },
+        {
+          "id": "reminders",
+          "label": "Reminders",
+          "icon": "⏰"
+        },
+        {
+          "id": "family",
+          "label": "Family",
+          "icon": "👨‍👩‍👧"
+        }
+      ]
+    },
+    {
+      "id": "offers",
+      "type": "offer_strip",
+      "background": {
+        "kind": "gradient",
+        "value": "#DBEAFE,#BFDBFE,#93C5FD"
+      },
+      "title": "Special offers",
+      "items": [
+        {
+          "id": "health-check",
+          "title": "Full Body Health Checkup",
+          "subtitle": "Starting from ₹999"
+        },
+        {
+          "id": "consult-offer",
+          "title": "Doctor Consultation",
+          "subtitle": "Get 20% off on your first consultation"
+        }
+      ]
+    },
+    {
+      "id": "services",
+      "type": "service_grid",
+      "background": {
+        "kind": "color",
+        "value": "#F8FAFC"
+      },
+      "title": "Our services",
+      "items": [
+        {
+          "id": "general-consultation",
+          "name": "General Consultation",
+          "icon": "🩺",
+          "subtitle": "Consult a doctor"
+        },
+        {
+          "id": "lab-tests",
+          "name": "Lab Tests",
+          "icon": "🧪",
+          "subtitle": "Book diagnostic tests"
+        },
+        {
+          "id": "health-checkup",
+          "name": "Health Checkup",
+          "icon": "❤️",
+          "subtitle": "Complete health packages"
+        },
+        {
+          "id": "vaccination",
+          "name": "Vaccination",
+          "icon": "💉",
+          "subtitle": "Stay protected"
+        }
+      ]
+    },
+    {
+      "id": "doctors",
+      "type": "doctor_carousel",
+      "background": {
+        "kind": "color",
+        "value": "#F8FAFC"
+      },
+      "title": "Top doctors",
+      "items": [
+        {
+          "id": "doctor-1",
+          "name": "Dr. Ananya Sharma",
+          "specialty": "General Physician",
+          "photoUrl": "https://i.pravatar.cc/300?img=47",
+          "feeInr": 499
+        },
+        {
+          "id": "doctor-2",
+          "name": "Dr. Rahul Mehta",
+          "specialty": "Cardiologist",
+          "photoUrl": "https://i.pravatar.cc/300?img=12",
+          "feeInr": 799
+        },
+        {
+          "id": "doctor-3",
+          "name": "Dr. Priya Kapoor",
+          "specialty": "Dermatologist",
+          "photoUrl": "https://i.pravatar.cc/300?img=32",
+          "feeInr": 699
+        }
+      ]
+    }
+  ]
+}
