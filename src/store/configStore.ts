@@ -10,6 +10,7 @@ interface ConfigState {
   error: string | null;
 
   loadConfig: () => Promise<void>;
+  updateConfig: (config: LayoutConfig) => void;
 }
 
 export const useConfigStore = create<ConfigState>(set => ({
@@ -49,5 +50,11 @@ export const useConfigStore = create<ConfigState>(set => ({
         error: 'Unable to load configuration',
       });
     }
+  },
+
+  updateConfig: config => {
+    set({
+      config,
+    });
   },
 }));

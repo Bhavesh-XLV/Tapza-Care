@@ -1,24 +1,50 @@
 import React from 'react';
-
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ConfigMode, getConfigMode, setConfigMode } from '../api/configApi';
-
 import { useConfigStore } from '../store/configStore';
 import { createTheme } from '../theme/createTheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function ProfileScreen() {
   const config = useConfigStore(state => state.config);
   const loadConfig = useConfigStore(state => state.loadConfig);
+  const updateConfig = useConfigStore(state => state.updateConfig);
+
   const insets = useSafeAreaInsets();
 
-  if (!config) {
+  if (config === null) {
     return null;
   }
 
   const theme = createTheme(config.theme);
   const currentMode = getConfigMode();
+
+  function changeHeroBackground(
+    kind: 'color' | 'gradient' | 'image',
+    value: string,
+  ): void {
+    const updatedConfig = {
+      ...config,
+      sections:
+        config &&
+        config.sections.map(section => {
+          if (section.type !== 'hero_banner' || section.id !== 'hero') {
+            return section;
+          }
+
+          return {
+            ...section,
+            background: {
+              kind,
+              value,
+            },
+          };
+        }),
+    };
+
+    updateConfig(updatedConfig);
+  }
 
   async function handleConfigSwitch(mode: ConfigMode): Promise<void> {
     if (mode === currentMode) {
@@ -35,9 +61,8 @@ function ProfileScreen() {
         styles.container,
         {
           backgroundColor: theme.colors.background,
-          paddingTop: insets.top,
-
-          paddingBottom: insets.bottom,
+          paddingTop: insets.top + theme.spacing.md,
+          paddingBottom: insets.bottom + theme.spacing.md,
         },
       ]}
     >
@@ -46,7 +71,7 @@ function ProfileScreen() {
           styles.title,
           {
             color: theme.colors.textPrimary,
-            fontSize: theme.typography.title,
+            fontSize: theme.typography.heading,
           },
         ]}
       >
@@ -55,61 +80,7 @@ function ProfileScreen() {
 
       <View
         style={[
-          styles.profileCard,
-          {
-            backgroundColor: theme.colors.surface,
-            borderRadius: theme.radius.lg,
-          },
-        ]}
-      >
-        <View
-          style={[
-            styles.avatar,
-            {
-              backgroundColor: theme.colors.secondary,
-            },
-          ]}
-        >
-          <Text
-            style={[
-              styles.avatarText,
-              {
-                color: theme.colors.primary,
-              },
-            ]}
-          >
-            B
-          </Text>
-        </View>
-
-        <Text
-          style={[
-            styles.name,
-            {
-              color: theme.colors.textPrimary,
-              fontSize: theme.typography.body,
-            },
-          ]}
-        >
-          Tapza Care Patient
-        </Text>
-
-        <Text
-          style={[
-            styles.subtitle,
-            {
-              color: theme.colors.textSecondary,
-              fontSize: theme.typography.caption,
-            },
-          ]}
-        >
-          Manage your profile and preferences
-        </Text>
-      </View>
-
-      <View
-        style={[
-          styles.configCard,
+          styles.card,
           {
             backgroundColor: theme.colors.surface,
             borderRadius: theme.radius.lg,
@@ -118,49 +89,46 @@ function ProfileScreen() {
       >
         <Text
           style={[
-            styles.configTitle,
+            styles.cardTitle,
             {
               color: theme.colors.textPrimary,
               fontSize: theme.typography.body,
             },
           ]}
         >
-          App Configuration
+          Remote Configuration
         </Text>
 
         <Text
           style={[
-            styles.configSubtitle,
+            styles.description,
             {
               color: theme.colors.textSecondary,
               fontSize: theme.typography.caption,
             },
           ]}
         >
-          Switch remote configuration at runtime
+          Change the app layout and theme without releasing a new app version.
         </Text>
 
         <View style={styles.switchRow}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Use normal day configuration"
-            onPress={() => {
-              handleConfigSwitch('normal');
-            }}
+            onPress={() => handleConfigSwitch('normal')}
             style={[
-              styles.switchButton,
+              styles.button,
               {
                 backgroundColor:
                   currentMode === 'normal'
                     ? theme.colors.primary
-                    : theme.colors.secondary,
-                borderRadius: theme.radius.pill,
+                    : theme.colors.background,
+                borderRadius: theme.radius.md,
               },
             ]}
           >
             <Text
               style={[
-                styles.switchText,
+                styles.buttonText,
                 {
                   color:
                     currentMode === 'normal'
@@ -169,30 +137,27 @@ function ProfileScreen() {
                 },
               ]}
             >
-              Normal Day
+              Normal
             </Text>
           </Pressable>
 
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Use Diwali configuration"
-            onPress={() => {
-              handleConfigSwitch('diwali');
-            }}
+            onPress={() => handleConfigSwitch('diwali')}
             style={[
-              styles.switchButton,
+              styles.button,
               {
                 backgroundColor:
                   currentMode === 'diwali'
                     ? theme.colors.primary
-                    : theme.colors.secondary,
-                borderRadius: theme.radius.pill,
+                    : theme.colors.background,
+                borderRadius: theme.radius.md,
               },
             ]}
           >
             <Text
               style={[
-                styles.switchText,
+                styles.buttonText,
                 {
                   color:
                     currentMode === 'diwali'
@@ -206,6 +171,118 @@ function ProfileScreen() {
           </Pressable>
         </View>
       </View>
+
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.colors.surface,
+            borderRadius: theme.radius.lg,
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.cardTitle,
+            {
+              color: theme.colors.textPrimary,
+              fontSize: theme.typography.body,
+            },
+          ]}
+        >
+          Hero Banner Background
+        </Text>
+
+        <Text
+          style={[
+            styles.description,
+            {
+              color: theme.colors.textSecondary,
+              fontSize: theme.typography.caption,
+            },
+          ]}
+        >
+          Change the Hero Banner configuration at runtime.
+        </Text>
+
+        <View style={styles.optionContainer}>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => changeHeroBackground('color', '#DBEAFE')}
+            style={[
+              styles.optionButton,
+              {
+                backgroundColor: '#DBEAFE',
+                borderRadius: theme.radius.md,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.optionText,
+                {
+                  color: theme.colors.textPrimary,
+                },
+              ]}
+            >
+              Color
+            </Text>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            onPress={() =>
+              changeHeroBackground('gradient', '#DBEAFE,#BFDBFE,#93C5FD')
+            }
+            style={[
+              styles.optionButton,
+              {
+                backgroundColor: '#BFDBFE',
+                borderRadius: theme.radius.md,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.optionText,
+                {
+                  color: theme.colors.textPrimary,
+                },
+              ]}
+            >
+              Gradient
+            </Text>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            onPress={() =>
+              changeHeroBackground(
+                'image',
+                'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D',
+              )
+            }
+            style={[
+              styles.optionButton,
+              {
+                backgroundColor: theme.colors.accent,
+                borderRadius: theme.radius.md,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.optionText,
+                {
+                  color: theme.colors.textPrimary,
+                },
+              ]}
+            >
+              Image
+            </Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 }
@@ -213,70 +290,48 @@ function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
   },
-
   title: {
     fontWeight: '700',
-    marginBottom: 20,
-  },
-
-  profileCard: {
-    alignItems: 'center',
-    padding: 24,
-  },
-
-  avatar: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    alignItems: 'center',
-    justifyContent: 'center',
     marginBottom: 16,
   },
-
-  avatarText: {
-    fontSize: 28,
-    fontWeight: '700',
+  card: {
+    padding: 16,
+    marginBottom: 16,
   },
-
-  name: {
-    fontWeight: '600',
+  cardTitle: {
+    fontWeight: '700',
     marginBottom: 8,
   },
-
-  subtitle: {
-    textAlign: 'center',
-  },
-
-  configCard: {
-    marginTop: 16,
-    padding: 20,
-  },
-
-  configTitle: {
-    fontWeight: '700',
-    marginBottom: 6,
-  },
-
-  configSubtitle: {
+  description: {
+    lineHeight: 18,
     marginBottom: 16,
   },
-
   switchRow: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 6,
   },
-
-  switchButton: {
+  button: {
+    minHeight: 44,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  },
+  buttonText: {
+    fontWeight: '600',
+  },
+  optionContainer: {
+    gap: 10,
+  },
+  optionButton: {
     minHeight: 44,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
-
-  switchText: {
+  optionText: {
     fontWeight: '600',
   },
 });

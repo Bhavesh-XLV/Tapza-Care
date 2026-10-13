@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { SectionBackground as SectionBackgroundConfig } from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
@@ -38,35 +39,19 @@ function SectionBackground({
     const colors = background.value.split(',').map(color => color.trim());
 
     return (
-      <View
+      <LinearGradient
+        colors={colors}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={[
           styles.container,
           {
-            backgroundColor: colors[0],
             borderRadius: theme.radius.lg,
           },
         ]}
       >
-        <View
-          style={[
-            styles.gradientMiddle,
-            {
-              backgroundColor: colors[1] ?? colors[0],
-            },
-          ]}
-        >
-          <View
-            style={[
-              styles.gradientBottom,
-              {
-                backgroundColor: colors[2] ?? colors[1] ?? colors[0],
-              },
-            ]}
-          >
-            {children}
-          </View>
-        </View>
-      </View>
+        {children}
+      </LinearGradient>
     );
   }
 
@@ -88,14 +73,6 @@ function SectionBackground({
 const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
-  },
-
-  gradientMiddle: {
-    flex: 1,
-  },
-
-  gradientBottom: {
-    flex: 1,
   },
 });
 
