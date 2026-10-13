@@ -1,97 +1,302 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Tapza Care – React Native Assignment
 
-# Getting Started
+A React Native patient-care application built as part of the Tapza Care technical assignment.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+The app demonstrates a remotely configurable home screen, multilingual content, appointment booking, prescriptions/reminders, offline configuration fallback, runtime theme changes, loading/error states, and animated UI interactions.
 
-## Step 1: Start Metro
+## Tech Stack
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- React Native CLI
+- TypeScript
+- React Navigation
+- Zustand
+- React Native Reanimated
+- React Native Gesture Handler
+- @gorhom/bottom-sheet
+- AsyncStorage
+- react-native-linear-gradient
+- Jest
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## How to Run
 
-```sh
-# Using npm
-npm start
+### Requirements
 
-# OR using Yarn
-yarn start
-```
+- Node.js
+- Watchman
+- Android Studio / Android SDK
+- Xcode + CocoaPods for iOS
+- React Native CLI environment
 
-## Step 2: Build and run your app
+### Install dependencies
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+yarn install
 ```
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
+```bash
+cd ios
+pod install
+cd ..
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```bash
+yarn android
+```
 
-## Step 3: Modify your app
+### TypeScript check
 
-Now that you have successfully run the app, let's make changes!
+```bash
+npx tsc --noEmit
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Folder Structure
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+```text
+src/
+├── api/
+│   ├── client.ts
+│   ├── configApi.ts
+│   ├── doctorsApi.ts
+│   ├── slotsApi.ts
+│   ├── bookingsApi.ts
+│   └── prescriptionsApi.ts
+│
+├── components/
+│   └── home/
+│       ├── SectionRenderer.tsx
+│       ├── SectionBackground.tsx
+│       ├── HeroBanner.tsx
+│       ├── CategoryChips.tsx
+│       ├── QuickActions.tsx
+│       ├── ServiceGrid.tsx
+│       ├── DoctorCarousel.tsx
+│       └── OfferStrip.tsx
+│
+├── mocks/
+│   ├── normalConfig.json
+│   ├── diwaliConfig.json
+│   ├── doctors.json
+│   ├── slots.json
+│   └── prescriptions.json
+│
+├── navigation/
+│   └── AppNavigator.tsx
+│
+├── screens/
+│   ├── HomeScreen.tsx
+│   ├── DoctorSelectionScreen.tsx
+│   ├── DateSelectionScreen.tsx
+│   ├── BookingConfirmationScreen.tsx
+│   ├── BookingSuccessScreen.tsx
+│   ├── BookingsScreen.tsx
+│   ├── PrescriptionsScreen.tsx
+│   ├── PrescriptionDetailScreen.tsx
+│   └── ProfileScreen.tsx
+│
+├── store/
+│   ├── configStore.ts
+│   ├── bookingStore.ts
+│   ├── reminderStore.ts
+│   └── languageStore.ts
+│
+├── theme/
+│   └── createTheme.ts
+│
+├── types/
+│   ├── config.ts
+│   ├── booking.ts
+│   └── prescription.ts
+│
+└── utils/
+    ├── configValidator.ts
+    └── configCache.ts
+```
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Architecture Decisions
 
-## Congratulations! :tada:
+### Remote-driven Home Screen
 
-You've successfully run and modified your React Native App. :partying_face:
+The home screen is driven by the `/config` response instead of hard-coded screen composition.
 
-### Now what?
+The backend can control:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- Section order
+- Section type
+- Section content
+- Background
+- Theme
+- Bottom tabs
+- Festival configuration
 
-# Troubleshooting
+Supported section types:
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+```text
+hero_banner
+category_chips
+quick_actions
+service_grid
+doctor_carousel
+offer_strip
+```
 
-# Learn More
+Unknown section types are intentionally ignored so that adding a new backend section does not crash older app versions.
 
-To learn more about React Native, take a look at the following resources:
+### Configuration Validation
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Remote configuration is treated as `unknown` and validated before being used.
+
+This prevents malformed configuration data from directly reaching the UI.
+
+### Offline Configuration Fallback
+
+The last valid configuration is stored using AsyncStorage.
+
+If the network request fails, the app attempts to render the last valid cached configuration. If no cache exists, an error state is displayed.
+
+### State Management
+
+Zustand is used for small, focused application state:
+
+- Remote configuration
+- Language
+- Booking state
+- Reminder/dose state
+
+A larger state-management layer was intentionally avoided because it would add unnecessary complexity for this assignment.
+
+### Theme
+
+The UI consumes theme values generated from the remote configuration.
+
+Colors, spacing, typography and radius values are centralized rather than scattered throughout the UI.
+
+### Booking Flow
+
+The booking flow is split into independent screens:
+
+```text
+Doctor
+  ↓
+Date
+  ↓
+Time Slot
+  ↓
+Confirmation
+  ↓
+Success
+```
+
+The booking store supports optimistic state, successful confirmation, conflicts and errors.
+
+### Multilingual Content
+
+Remote content supports:
+
+- English
+- Telugu
+
+Localized values are represented as:
+
+```ts
+{
+  en: 'Book Appointment',
+  te: 'అపాయింట్‌మెంట్ బుక్ చేయండి'
+}
+```
+
+The selected language is controlled through Zustand.
+
+This keeps localization data-driven instead of duplicating screens for each language.
+
+## Runtime Configuration Demo
+
+The Profile screen can switch between:
+
+- Normal configuration
+- Diwali configuration
+
+This demonstrates that the application UI can change without modifying the screen implementation.
+
+The configuration can change:
+
+- Theme colors
+- Festival greeting
+- Section order
+- Section content
+- Services
+- Offers
+
+An intentionally unknown section type is also included to demonstrate graceful handling of unsupported sections.
+
+## Resilience
+
+The mock network layer supports configurable latency and failures.
+
+Example:
+
+```ts
+mockNetwork.latencyMs = 700;
+mockNetwork.shouldFail = false;
+```
+
+This allows loading, error and cached-data scenarios to be tested without depending on a real backend.
+
+## What I Cut / Simplified
+
+Given the assignment time constraint, some areas were intentionally simplified.
+
+### Backend
+
+No real backend was implemented.
+
+The API layer is separated from the UI and uses local mock data so it can later be replaced with real HTTP endpoints.
+
+## Honest Time Spent
+
+Approximately **5 hours** were spent on the assignment.
+
+Approximate breakdown:
+
+| Area                            |       Time |
+| ------------------------------- | ---------: |
+| Project setup & architecture    |     ~1 hrs |
+| Dynamic home/config system      |     ~1 hrs |
+| Booking flow                    |    ~30 min |
+| Prescriptions/reminders         |    ~30 min |
+| Multilingual support            |    ~30 min |
+| Resilience/loading/error states |    ~30 min |
+| UI polish & animations          |    ~30 min |
+| README/documentation            |    ~30 min |
+| **Total**                       | **~5 hrs** |
+
+This is an approximate development-time estimate.
+
+## Trade-offs
+
+The primary goal was to demonstrate maintainable architecture and complete the main user flows within the assignment deadline.
+
+Priorities were:
+
+1. Remote-driven UI
+2. Runtime configuration
+3. Offline configuration fallback
+4. Appointment booking flow
+5. Prescription/reminder flow
+6. Multilingual support
+7. Loading/error states
+8. Animation and UI polish
+
+Infrastructure that would not provide meaningful value within the assignment scope was intentionally kept out.
+
+## AI Usage
+
+AI assistance was used during development for debugging, TypeScript issues, architecture discussion, code review and implementation guidance.
+
+Final implementation decisions, integration, testing and debugging were performed during the development process.
+
+See `AI_LOG.md` for details.
