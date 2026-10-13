@@ -92,6 +92,8 @@ function DateSelectionScreen({ route }: Props) {
       return;
     }
 
+    const date = selectedDate;
+
     async function loadSlots() {
       setIsLoadingSlots(true);
       setSlotsError(null);
@@ -99,7 +101,7 @@ function DateSelectionScreen({ route }: Props) {
       setSelectedSlot(null);
 
       try {
-        const response = await getSlots(doctorId, selectedDate);
+        const response = await getSlots(doctorId, date);
 
         setSlots(response);
       } catch {

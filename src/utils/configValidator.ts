@@ -4,6 +4,14 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
 
+function isLocalizedText(value: unknown): boolean {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  return typeof value.en === 'string' && typeof value.te === 'string';
+}
+
 function isThemeConfig(value: unknown): boolean {
   if (!isObject(value)) {
     return false;
@@ -23,8 +31,8 @@ function isThemeConfig(value: unknown): boolean {
     typeof value.textPrimary === 'string' &&
     typeof value.textSecondary === 'string' &&
     typeof value.accent === 'string' &&
-    typeof festival.name === 'string' &&
-    typeof festival.greeting === 'string' &&
+    isLocalizedText(festival.name) &&
+    isLocalizedText(festival.greeting) &&
     typeof festival.bannerImageUrl === 'string'
   );
 }
@@ -36,7 +44,7 @@ function isTabConfig(value: unknown): boolean {
 
   return (
     typeof value.id === 'string' &&
-    typeof value.label === 'string' &&
+    isLocalizedText(value.label) &&
     typeof value.icon === 'string' &&
     (value.screen === 'home' ||
       value.screen === 'bookings' ||
@@ -66,7 +74,7 @@ function isSectionConfig(value: unknown): boolean {
     typeof value.type === 'string' &&
     validBackground &&
     typeof background.value === 'string' &&
-    typeof value.title === 'string' &&
+    isLocalizedText(value.title) &&
     Array.isArray(value.items)
   );
 }
@@ -78,6 +86,7 @@ export function isLayoutConfig(value: unknown): value is LayoutConfig {
 
   return (
     typeof value.version === 'number' &&
+    (value.defaultLanguage === 'en' || value.defaultLanguage === 'te') &&
     isThemeConfig(value.theme) &&
     Array.isArray(value.tabs) &&
     value.tabs.every(isTabConfig) &&

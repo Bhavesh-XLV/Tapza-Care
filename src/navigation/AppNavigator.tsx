@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 import { useConfigStore } from '../store/configStore';
+import { useLanguageStore } from '../store/languageStore';
 
 import HomeScreen from '../screens/HomeScreen';
 import DoctorSelectionScreen from '../screens/DoctorSelectionScreen';
@@ -55,6 +56,7 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 
 function MainTabs() {
   const config = useConfigStore(state => state.config);
+  const language = useLanguageStore(state => state.language);
 
   if (!config) {
     return null;
@@ -100,20 +102,20 @@ function MainTabs() {
           name="Home"
           component={HomeScreen}
           options={{
-            tabBarLabel: homeTab.label,
+            tabBarLabel: homeTab.label[language],
             tabBarIcon: () => (
               <Text style={{ fontSize: 22 }}>{getTabIcon(homeTab.icon)}</Text>
             ),
           }}
         />
       ) : null}
+
       {bookingsTab ? (
         <Tab.Screen
           name="Bookings"
           component={BookingsScreen}
           options={{
-            tabBarLabel: bookingsTab.label,
-
+            tabBarLabel: bookingsTab.label[language],
             tabBarIcon: () => (
               <Text style={{ fontSize: 22 }}>
                 {getTabIcon(bookingsTab.icon)}
@@ -122,13 +124,13 @@ function MainTabs() {
           }}
         />
       ) : null}
+
       {prescriptionsTab ? (
         <Tab.Screen
           name="Prescriptions"
           component={PrescriptionsScreen}
           options={{
-            tabBarLabel: prescriptionsTab.label,
-
+            tabBarLabel: prescriptionsTab.label[language],
             tabBarIcon: () => (
               <Text style={{ fontSize: 22 }}>
                 {getTabIcon(prescriptionsTab.icon)}
@@ -137,13 +139,13 @@ function MainTabs() {
           }}
         />
       ) : null}
+
       {profileTab ? (
         <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarLabel: profileTab.label,
-
+            tabBarLabel: profileTab.label[language],
             tabBarIcon: () => (
               <Text style={{ fontSize: 22 }}>
                 {getTabIcon(profileTab.icon)}

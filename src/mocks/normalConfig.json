@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "defaultLanguage": "en",
   "theme": {
     "primary": "#2563EB",
     "secondary": "#E0F2FE",
@@ -9,33 +10,51 @@
     "textSecondary": "#64748B",
     "accent": "#16A34A",
     "festival": {
-      "name": "Normal Day",
-      "greeting": "Good evening",
+      "name": {
+        "en": "Normal Day",
+        "te": "సాధారణ రోజు"
+      },
+      "greeting": {
+        "en": "Good evening",
+        "te": "శుభ సాయంత్రం"
+      },
       "bannerImageUrl": ""
     }
   },
   "tabs": [
     {
       "id": "home",
-      "label": "Home",
+      "label": {
+        "en": "Home",
+        "te": "హోమ్"
+      },
       "icon": "home",
       "screen": "home"
     },
     {
       "id": "bookings",
-      "label": "Bookings",
+      "label": {
+        "en": "Bookings",
+        "te": "బుకింగ్స్"
+      },
       "icon": "calendar",
       "screen": "bookings"
     },
     {
       "id": "prescriptions",
-      "label": "Prescriptions",
+      "label": {
+        "en": "Prescriptions",
+        "te": "ప్రిస్క్రిప్షన్లు"
+      },
       "icon": "file",
       "screen": "prescriptions"
     },
     {
       "id": "profile",
-      "label": "Profile",
+      "label": {
+        "en": "Profile",
+        "te": "ప్రొఫైల్"
+      },
       "icon": "user",
       "screen": "profile"
     }
@@ -48,7 +67,10 @@
         "kind": "gradient",
         "value": "#DBEAFE,#BFDBFE,#93C5FD"
       },
-      "title": "Your health, simplified",
+      "title": {
+        "en": "Your health, simplified",
+        "te": "మీ ఆరోగ్యం, ఇప్పుడు మరింత సులభం"
+      },
       "items": []
     },
     {
@@ -58,23 +80,38 @@
         "kind": "color",
         "value": "#F8FAFC"
       },
-      "title": "What do you need?",
+      "title": {
+        "en": "What do you need?",
+        "te": "మీకు ఏమి కావాలి?"
+      },
       "items": [
         {
           "id": "consult",
-          "label": "Consult"
+          "label": {
+            "en": "Consult",
+            "te": "సంప్రదించండి"
+          }
         },
         {
           "id": "lab",
-          "label": "Lab Tests"
+          "label": {
+            "en": "Lab Tests",
+            "te": "ల్యాబ్ పరీక్షలు"
+          }
         },
         {
           "id": "pharmacy",
-          "label": "Pharmacy"
+          "label": {
+            "en": "Pharmacy",
+            "te": "ఫార్మసీ"
+          }
         },
         {
           "id": "vaccines",
-          "label": "Vaccines"
+          "label": {
+            "en": "Vaccines",
+            "te": "టీకాలు"
+          }
         }
       ]
     },
@@ -85,31 +122,45 @@
         "kind": "color",
         "value": "#F8FAFC"
       },
-      "title": "Quick actions",
+      "title": {
+        "en": "Quick actions",
+        "te": "త్వరిత చర్యలు"
+      },
       "items": [
         {
           "id": "book",
-          "label": "Book",
+          "label": {
+            "en": "Book",
+            "te": "బుక్ చేయండి"
+          },
           "icon": "📅"
         },
         {
           "id": "prescriptions",
-          "label": "Prescriptions",
+          "label": {
+            "en": "Prescriptions",
+            "te": "ప్రిస్క్రిప్షన్లు"
+          },
           "icon": "📋"
         },
         {
           "id": "reminders",
-          "label": "Reminders",
+          "label": {
+            "en": "Reminders",
+            "te": "రిమైండర్లు"
+          },
           "icon": "⏰"
         },
         {
           "id": "family",
-          "label": "Family",
+          "label": {
+            "en": "Family",
+            "te": "కుటుంబం"
+          },
           "icon": "👨‍👩‍👧"
         }
       ]
     },
-
     {
       "id": "services",
       "type": "service_grid",
@@ -117,31 +168,58 @@
         "kind": "color",
         "value": "#F8FAFC"
       },
-      "title": "Our services",
+      "title": {
+        "en": "Our services",
+        "te": "మా సేవలు"
+      },
       "items": [
         {
           "id": "general-consultation",
-          "name": "General Consultation",
+          "name": {
+            "en": "General Consultation",
+            "te": "సాధారణ సంప్రదింపు"
+          },
           "icon": "🩺",
-          "subtitle": "Consult a doctor"
+          "subtitle": {
+            "en": "Consult a doctor",
+            "te": "వైద్యుడిని సంప్రదించండి"
+          }
         },
         {
           "id": "lab-tests",
-          "name": "Lab Tests",
+          "name": {
+            "en": "Lab Tests",
+            "te": "ల్యాబ్ పరీక్షలు"
+          },
           "icon": "🧪",
-          "subtitle": "Book diagnostic tests"
+          "subtitle": {
+            "en": "Book diagnostic tests",
+            "te": "డయాగ్నస్టిక్ పరీక్షలను బుక్ చేయండి"
+          }
         },
         {
           "id": "health-checkup",
-          "name": "Health Checkup",
+          "name": {
+            "en": "Health Checkup",
+            "te": "ఆరోగ్య పరీక్ష"
+          },
           "icon": "❤️",
-          "subtitle": "Complete health packages"
+          "subtitle": {
+            "en": "Complete health packages",
+            "te": "సంపూర్ణ ఆరోగ్య ప్యాకేజీలు"
+          }
         },
         {
           "id": "vaccination",
-          "name": "Vaccination",
+          "name": {
+            "en": "Vaccination",
+            "te": "టీకాలు"
+          },
           "icon": "💉",
-          "subtitle": "Stay protected"
+          "subtitle": {
+            "en": "Stay protected",
+            "te": "రక్షణగా ఉండండి"
+          }
         }
       ]
     },
@@ -152,26 +230,47 @@
         "kind": "color",
         "value": "#F8FAFC"
       },
-      "title": "Top doctors",
+      "title": {
+        "en": "Top doctors",
+        "te": "ముఖ్యమైన వైద్యులు"
+      },
       "items": [
         {
           "id": "doctor-1",
-          "name": "Dr. Ananya Sharma",
-          "specialty": "General Physician",
+          "name": {
+            "en": "Dr. Ananya Sharma",
+            "te": "డా. అనన్య శర్మ"
+          },
+          "specialty": {
+            "en": "General Physician",
+            "te": "జనరల్ ఫిజీషియన్"
+          },
           "photoUrl": "https://i.pravatar.cc/300?img=47",
           "feeInr": 499
         },
         {
           "id": "doctor-2",
-          "name": "Dr. Rahul Mehta",
-          "specialty": "Cardiologist",
+          "name": {
+            "en": "Dr. Rahul Mehta",
+            "te": "డా. రాహుల్ మెహతా"
+          },
+          "specialty": {
+            "en": "Cardiologist",
+            "te": "కార్డియాలజిస్ట్"
+          },
           "photoUrl": "https://i.pravatar.cc/300?img=12",
           "feeInr": 799
         },
         {
           "id": "doctor-3",
-          "name": "Dr. Priya Kapoor",
-          "specialty": "Dermatologist",
+          "name": {
+            "en": "Dr. Priya Kapoor",
+            "te": "డా. ప్రియా కపూర్"
+          },
+          "specialty": {
+            "en": "Dermatologist",
+            "te": "డెర్మటాలజిస్ట్"
+          },
           "photoUrl": "https://i.pravatar.cc/300?img=32",
           "feeInr": 699
         }
@@ -184,17 +283,32 @@
         "kind": "gradient",
         "value": "#DBEAFE,#BFDBFE,#93C5FD"
       },
-      "title": "Special offers",
+      "title": {
+        "en": "Special offers",
+        "te": "ప్రత్యేక ఆఫర్లు"
+      },
       "items": [
         {
           "id": "health-check",
-          "title": "Full Body Health Checkup",
-          "subtitle": "Starting from ₹999"
+          "title": {
+            "en": "Full Body Health Checkup",
+            "te": "పూర్తి శరీర ఆరోగ్య పరీక్ష"
+          },
+          "subtitle": {
+            "en": "Starting from ₹999",
+            "te": "₹999 నుండి ప్రారంభం"
+          }
         },
         {
           "id": "consult-offer",
-          "title": "Doctor Consultation",
-          "subtitle": "Get 20% off on your first consultation"
+          "title": {
+            "en": "Doctor Consultation",
+            "te": "వైద్యుల సంప్రదింపు"
+          },
+          "subtitle": {
+            "en": "Get 20% off on your first consultation",
+            "te": "మీ మొదటి సంప్రదింపుపై 20% తగ్గింపు పొందండి"
+          }
         }
       ]
     }

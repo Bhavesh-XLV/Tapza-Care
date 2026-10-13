@@ -4,12 +4,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ConfigMode, getConfigMode, setConfigMode } from '../api/configApi';
 import { useConfigStore } from '../store/configStore';
+import { useLanguageStore } from '../store/languageStore';
 import { createTheme } from '../theme/createTheme';
+import { LayoutConfig, SupportedLanguage } from '../types/config';
 
 function ProfileScreen() {
   const config = useConfigStore(state => state.config);
   const loadConfig = useConfigStore(state => state.loadConfig);
   const updateConfig = useConfigStore(state => state.updateConfig);
+
+  const language = useLanguageStore(state => state.language);
+  const setLanguage = useLanguageStore(state => state.setLanguage);
 
   const insets = useSafeAreaInsets();
 
@@ -17,30 +22,29 @@ function ProfileScreen() {
     return null;
   }
 
-  const theme = createTheme(config.theme);
   const currentMode = getConfigMode();
+  const currentConfig = config;
+  const theme = createTheme(currentConfig.theme);
 
   function changeHeroBackground(
     kind: 'color' | 'gradient' | 'image',
     value: string,
   ): void {
-    const updatedConfig = {
-      ...config,
-      sections:
-        config &&
-        config.sections.map(section => {
-          if (section.type !== 'hero_banner' || section.id !== 'hero') {
-            return section;
-          }
+    const updatedConfig: LayoutConfig = {
+      ...currentConfig,
+      sections: currentConfig.sections.map(section => {
+        if (section.type !== 'hero_banner' || section.id !== 'hero') {
+          return section;
+        }
 
-          return {
-            ...section,
-            background: {
-              kind,
-              value,
-            },
-          };
-        }),
+        return {
+          ...section,
+          background: {
+            kind,
+            value,
+          },
+        };
+      }),
     };
 
     updateConfig(updatedConfig);
@@ -53,6 +57,10 @@ function ProfileScreen() {
 
     setConfigMode(mode);
     await loadConfig();
+  }
+
+  function handleLanguageChange(selectedLanguage: SupportedLanguage): void {
+    setLanguage(selectedLanguage);
   }
 
   return (
@@ -78,6 +86,104 @@ function ProfileScreen() {
         Profile
       </Text>
 
+      {/* Language */}
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.colors.surface,
+            borderRadius: theme.radius.lg,
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.cardTitle,
+            {
+              color: theme.colors.textPrimary,
+              fontSize: theme.typography.body,
+            },
+          ]}
+        >
+          Language
+        </Text>
+
+        <Text
+          style={[
+            styles.description,
+            {
+              color: theme.colors.textSecondary,
+              fontSize: theme.typography.caption,
+            },
+          ]}
+        >
+          Choose your preferred language.
+        </Text>
+
+        <View style={styles.switchRow}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="English language"
+            onPress={() => handleLanguageChange('en')}
+            style={[
+              styles.button,
+              {
+                backgroundColor:
+                  language === 'en'
+                    ? theme.colors.primary
+                    : theme.colors.background,
+                borderRadius: theme.radius.md,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.buttonText,
+                {
+                  color:
+                    language === 'en'
+                      ? theme.colors.surface
+                      : theme.colors.textPrimary,
+                },
+              ]}
+            >
+              English
+            </Text>
+          </Pressable>
+
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Telugu language"
+            onPress={() => handleLanguageChange('te')}
+            style={[
+              styles.button,
+              {
+                backgroundColor:
+                  language === 'te'
+                    ? theme.colors.primary
+                    : theme.colors.background,
+                borderRadius: theme.radius.md,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.buttonText,
+                {
+                  color:
+                    language === 'te'
+                      ? theme.colors.surface
+                      : theme.colors.textPrimary,
+                },
+              ]}
+            >
+              తెలుగు
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+
+      {/* Remote Configuration */}
       <View
         style={[
           styles.card,
@@ -172,6 +278,7 @@ function ProfileScreen() {
         </View>
       </View>
 
+      {/* Hero Banner */}
       <View
         style={[
           styles.card,

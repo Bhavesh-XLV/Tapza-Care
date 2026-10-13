@@ -15,12 +15,14 @@ import { useConfigStore } from '../store/configStore';
 import { createTheme } from '../theme/createTheme';
 
 import SectionRenderer from '../components/home/SectionRenderer';
+import { useLanguageStore } from '../store/languageStore';
 
 function HomeScreen() {
   const insets = useSafeAreaInsets();
   const scrollY = useSharedValue(0);
 
   const { config, isLoading, error } = useConfigStore();
+  const language = useLanguageStore(state => state.language);
 
   const animatedHeaderStyle = useAnimatedStyle(() => {
     const height = interpolate(
@@ -130,7 +132,7 @@ function HomeScreen() {
             },
           ]}
         >
-          {config.theme.festival.greeting}
+          {config.theme.festival.greeting[language]}
         </Animated.Text>
       </Animated.View>
 

@@ -1,54 +1,76 @@
 {
-  "version": 2,
+  "version": 1,
+  "defaultLanguage": "en",
   "theme": {
-    "primary": "#B91C1C",
-    "secondary": "#FEF3C7",
+    "primary": "#EA580C",
+    "secondary": "#FFEDD5",
     "background": "#FFF7ED",
     "surface": "#FFFFFF",
     "textPrimary": "#431407",
-    "textSecondary": "#7C2D12",
-    "accent": "#D97706",
+    "textSecondary": "#9A3412",
+    "accent": "#CA8A04",
     "festival": {
-      "name": "Diwali",
-      "greeting": "Happy Diwali",
-      "bannerImageUrl": "https://images.unsplash.com/photo-1605201200809-7c8a4c8a3c1f"
+      "name": {
+        "en": "Diwali",
+        "te": "దీపావళి"
+      },
+      "greeting": {
+        "en": "Happy Diwali",
+        "te": "దీపావళి శుభాకాంక్షలు"
+      },
+      "bannerImageUrl": ""
     }
   },
   "tabs": [
     {
       "id": "home",
-      "label": "Home",
+      "label": {
+        "en": "Home",
+        "te": "హోమ్"
+      },
       "icon": "home",
       "screen": "home"
     },
     {
       "id": "bookings",
-      "label": "Bookings",
+      "label": {
+        "en": "Bookings",
+        "te": "బుకింగ్స్"
+      },
       "icon": "calendar",
       "screen": "bookings"
     },
     {
       "id": "prescriptions",
-      "label": "Prescriptions",
+      "label": {
+        "en": "Prescriptions",
+        "te": "ప్రిస్క్రిప్షన్లు"
+      },
       "icon": "file",
       "screen": "prescriptions"
     },
     {
       "id": "profile",
-      "label": "Profile",
+      "label": {
+        "en": "Profile",
+        "te": "ప్రొఫైల్"
+      },
       "icon": "user",
       "screen": "profile"
     }
   ],
   "sections": [
     {
-      "id": "festival-hero",
+      "id": "hero",
       "type": "hero_banner",
       "background": {
         "kind": "gradient",
-        "value": "#FEF3C7,#FDBA74,#FB923C"
+        "value": "#FFF7ED,#FED7AA,#FDBA74"
       },
-      "title": "Happy Diwali",
+      "title": {
+        "en": "Celebrate Diwali with better health",
+        "te": "మెరుగైన ఆరోగ్యంతో దీపావళిని జరుపుకోండి"
+      },
       "items": []
     },
     {
@@ -58,25 +80,58 @@
         "kind": "color",
         "value": "#FFF7ED"
       },
-      "title": "Festival Care",
+      "title": {
+        "en": "Diwali health services",
+        "te": "దీపావళి ఆరోగ్య సేవలు"
+      },
       "items": [
         {
+          "id": "diwali-checkup",
+          "name": {
+            "en": "Diwali Health Checkup",
+            "te": "దీపావళి ఆరోగ్య పరీక్ష"
+          },
+          "icon": "🩺",
+          "subtitle": {
+            "en": "Stay healthy this festive season",
+            "te": "ఈ పండుగ సీజన్‌లో ఆరోగ్యంగా ఉండండి"
+          }
+        },
+        {
           "id": "family-checkup",
-          "name": "Family Checkup",
+          "name": {
+            "en": "Family Checkup",
+            "te": "కుటుంబ ఆరోగ్య పరీక్ష"
+          },
           "icon": "👨‍👩‍👧",
-          "subtitle": "Care for your family"
+          "subtitle": {
+            "en": "Health care for your family",
+            "te": "మీ కుటుంబానికి ఆరోగ్య సంరక్షణ"
+          }
         },
         {
           "id": "diabetes-check",
-          "name": "Diabetes Check",
+          "name": {
+            "en": "Diabetes Check",
+            "te": "డయాబెటిస్ పరీక్ష"
+          },
           "icon": "🩸",
-          "subtitle": "Monitor your health"
+          "subtitle": {
+            "en": "Monitor your health",
+            "te": "మీ ఆరోగ్యాన్ని పర్యవేక్షించండి"
+          }
         },
         {
-          "id": "heart-check",
-          "name": "Heart Checkup",
-          "icon": "❤️",
-          "subtitle": "Keep your heart healthy"
+          "id": "nutrition",
+          "name": {
+            "en": "Nutrition Advice",
+            "te": "పోషకాహార సలహా"
+          },
+          "icon": "🥗",
+          "subtitle": {
+            "en": "Healthy festive eating tips",
+            "te": "ఆరోగ్యకరమైన పండుగ ఆహార సూచనలు"
+          }
         }
       ]
     },
@@ -87,30 +142,52 @@
         "kind": "color",
         "value": "#FFF7ED"
       },
-      "title": "Health Services",
+      "title": {
+        "en": "Explore health services",
+        "te": "ఆరోగ్య సేవలను అన్వేషించండి"
+      },
       "items": [
         {
           "id": "consult",
-          "label": "Consult"
+          "label": {
+            "en": "Consult",
+            "te": "సంప్రదించండి"
+          }
         },
         {
           "id": "lab",
-          "label": "Lab Tests"
+          "label": {
+            "en": "Lab Tests",
+            "te": "ల్యాబ్ పరీక్షలు"
+          }
         },
         {
           "id": "pharmacy",
-          "label": "Pharmacy"
+          "label": {
+            "en": "Pharmacy",
+            "te": "ఫార్మసీ"
+          }
+        },
+        {
+          "id": "vaccines",
+          "label": {
+            "en": "Vaccines",
+            "te": "టీకాలు"
+          }
         }
       ]
     },
     {
-      "id": "diwali-unknown",
+      "id": "future-section",
       "type": "future_section",
       "background": {
         "kind": "color",
         "value": "#FFF7ED"
       },
-      "title": "Future Section",
+      "title": {
+        "en": "Future section",
+        "te": "భవిష్యత్ విభాగం"
+      },
       "items": []
     },
     {
@@ -120,42 +197,85 @@
         "kind": "color",
         "value": "#FFF7ED"
       },
-      "title": "Doctors Available",
+      "title": {
+        "en": "Top doctors",
+        "te": "ముఖ్యమైన వైద్యులు"
+      },
       "items": [
         {
           "id": "doctor-1",
-          "name": "Dr. Ananya Sharma",
-          "specialty": "General Physician",
+          "name": {
+            "en": "Dr. Ananya Sharma",
+            "te": "డా. అనన్య శర్మ"
+          },
+          "specialty": {
+            "en": "General Physician",
+            "te": "జనరల్ ఫిజీషియన్"
+          },
           "photoUrl": "https://i.pravatar.cc/300?img=47",
           "feeInr": 499
         },
         {
           "id": "doctor-2",
-          "name": "Dr. Rahul Mehta",
-          "specialty": "Cardiologist",
+          "name": {
+            "en": "Dr. Rahul Mehta",
+            "te": "డా. రాహుల్ మెహతా"
+          },
+          "specialty": {
+            "en": "Cardiologist",
+            "te": "కార్డియాలజిస్ట్"
+          },
           "photoUrl": "https://i.pravatar.cc/300?img=12",
           "feeInr": 799
+        },
+        {
+          "id": "doctor-3",
+          "name": {
+            "en": "Dr. Priya Kapoor",
+            "te": "డా. ప్రియా కపూర్"
+          },
+          "specialty": {
+            "en": "Dermatologist",
+            "te": "డెర్మటాలజిస్ట్"
+          },
+          "photoUrl": "https://i.pravatar.cc/300?img=32",
+          "feeInr": 699
         }
       ]
     },
     {
-      "id": "diwali-offers",
+      "id": "offers",
       "type": "offer_strip",
       "background": {
         "kind": "gradient",
-        "value": "#FDE68A,#FDBA74,#FCA5A5"
+        "value": "#FED7AA,#FDBA74,#FB923C"
       },
-      "title": "Diwali Health Offers",
+      "title": {
+        "en": "Diwali special offers",
+        "te": "దీపావళి ప్రత్యేక ఆఫర్లు"
+      },
       "items": [
         {
-          "id": "diwali-checkup",
-          "title": "Diwali Full Body Checkup",
-          "subtitle": "Starting from ₹799"
+          "id": "diwali-checkup-offer",
+          "title": {
+            "en": "Full Body Health Checkup",
+            "te": "పూర్తి శరీర ఆరోగ్య పరీక్ష"
+          },
+          "subtitle": {
+            "en": "Diwali special price from ₹799",
+            "te": "దీపావళి ప్రత్యేక ధర ₹799 నుండి"
+          }
         },
         {
-          "id": "diwali-consult",
-          "title": "Doctor Consultation",
-          "subtitle": "20% off this Diwali"
+          "id": "diwali-consult-offer",
+          "title": {
+            "en": "Doctor Consultation",
+            "te": "వైద్యుల సంప్రదింపు"
+          },
+          "subtitle": {
+            "en": "Get 30% off on your first consultation",
+            "te": "మీ మొదటి సంప్రదింపుపై 30% తగ్గింపు"
+          }
         }
       ]
     }

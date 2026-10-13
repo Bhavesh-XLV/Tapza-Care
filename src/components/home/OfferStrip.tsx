@@ -1,21 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { LayoutSection } from '../../types/config';
+import {
+  LayoutSection,
+  LocalizedText,
+  SupportedLanguage,
+} from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
 
 interface OfferItem {
   id: string;
-  title: string;
-  subtitle: string;
+  title: LocalizedText;
+  subtitle: LocalizedText;
 }
 
 interface OfferStripProps {
   section: LayoutSection;
   theme: AppTheme;
+  language: SupportedLanguage;
 }
 
-function OfferStrip({ section, theme }: OfferStripProps) {
+function OfferStrip({ section, theme, language }: OfferStripProps) {
   const items = section.items as OfferItem[];
 
   return (
@@ -30,7 +35,7 @@ function OfferStrip({ section, theme }: OfferStripProps) {
           },
         ]}
       >
-        {section.title}
+        {section.title[language]}
       </Text>
 
       {items.map(item => (
@@ -55,7 +60,7 @@ function OfferStrip({ section, theme }: OfferStripProps) {
               },
             ]}
           >
-            {item.title}
+            {item.title[language]}
           </Text>
 
           <Text
@@ -68,7 +73,7 @@ function OfferStrip({ section, theme }: OfferStripProps) {
               },
             ]}
           >
-            {item.subtitle}
+            {item.subtitle[language]}
           </Text>
         </View>
       ))}

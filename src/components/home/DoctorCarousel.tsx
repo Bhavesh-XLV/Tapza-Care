@@ -1,13 +1,17 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 
-import { LayoutSection } from '../../types/config';
+import {
+  LayoutSection,
+  LocalizedText,
+  SupportedLanguage,
+} from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
 
 interface DoctorItem {
   id: string;
-  name: string;
-  specialty: string;
+  name: LocalizedText;
+  specialty: LocalizedText;
   photoUrl: string;
   feeInr: number;
 }
@@ -15,9 +19,10 @@ interface DoctorItem {
 interface DoctorCarouselProps {
   section: LayoutSection;
   theme: AppTheme;
+  language: SupportedLanguage;
 }
 
-function DoctorCarousel({ section, theme }: DoctorCarouselProps) {
+function DoctorCarousel({ section, theme, language }: DoctorCarouselProps) {
   const items = section.items as DoctorItem[];
 
   return (
@@ -32,7 +37,7 @@ function DoctorCarousel({ section, theme }: DoctorCarouselProps) {
           },
         ]}
       >
-        {section.title}
+        {section.title[language]}
       </Text>
 
       <FlatList
@@ -62,6 +67,8 @@ function DoctorCarousel({ section, theme }: DoctorCarouselProps) {
                   borderRadius: theme.radius.lg,
                 },
               ]}
+              accessibilityRole="image"
+              accessibilityLabel={item.name[language]}
             />
 
             <Text
@@ -75,7 +82,7 @@ function DoctorCarousel({ section, theme }: DoctorCarouselProps) {
                 },
               ]}
             >
-              {item.name}
+              {item.name[language]}
             </Text>
 
             <Text
@@ -89,7 +96,7 @@ function DoctorCarousel({ section, theme }: DoctorCarouselProps) {
                 },
               ]}
             >
-              {item.specialty}
+              {item.specialty[language]}
             </Text>
 
             <Text

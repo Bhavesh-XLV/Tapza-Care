@@ -8,6 +8,13 @@ export type SectionType =
   | 'doctor_carousel'
   | 'offer_strip';
 
+export type SupportedLanguage = 'en' | 'te';
+
+export interface LocalizedText {
+  en: string;
+  te: string;
+}
+
 export interface SectionBackground {
   kind: BackgroundKind;
   value: string;
@@ -22,29 +29,34 @@ export interface ThemeConfig {
   textSecondary: string;
   accent: string;
   festival: {
-    name: string;
-    greeting: string;
+    name: LocalizedText;
+    greeting: LocalizedText;
     bannerImageUrl: string;
   };
 }
 
 export interface TabConfig {
   id: string;
-  label: string;
+  label: LocalizedText;
   icon: string;
   screen: 'home' | 'bookings' | 'prescriptions' | 'profile';
+}
+
+export interface LocalizedSection {
+  title: LocalizedText;
 }
 
 export interface LayoutSection {
   id: string;
   type: string;
   background: SectionBackground;
-  title: string;
+  title: LocalizedText;
   items: unknown[];
 }
 
 export interface LayoutConfig {
   version: number;
+  defaultLanguage: SupportedLanguage;
   theme: ThemeConfig;
   tabs: TabConfig[];
   sections: LayoutSection[];

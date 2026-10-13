@@ -1,22 +1,27 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { LayoutSection } from '../../types/config';
+import {
+  LayoutSection,
+  LocalizedText,
+  SupportedLanguage,
+} from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
 
 interface ServiceItem {
   id: string;
-  name: string;
+  name: LocalizedText;
   icon: string;
-  subtitle?: string;
+  subtitle?: LocalizedText;
 }
 
 interface ServiceGridProps {
   section: LayoutSection;
   theme: AppTheme;
+  language: SupportedLanguage;
 }
 
-function ServiceGrid({ section, theme }: ServiceGridProps) {
+function ServiceGrid({ section, theme, language }: ServiceGridProps) {
   const items = section.items as ServiceItem[];
 
   return (
@@ -31,7 +36,7 @@ function ServiceGrid({ section, theme }: ServiceGridProps) {
           },
         ]}
       >
-        {section.title}
+        {section.title[language]}
       </Text>
 
       <FlatList
@@ -84,7 +89,7 @@ function ServiceGrid({ section, theme }: ServiceGridProps) {
                 },
               ]}
             >
-              {item.name}
+              {item.name[language]}
             </Text>
 
             {item.subtitle ? (
@@ -98,7 +103,7 @@ function ServiceGrid({ section, theme }: ServiceGridProps) {
                   },
                 ]}
               >
-                {item.subtitle}
+                {item.subtitle[language]}
               </Text>
             ) : null}
           </View>

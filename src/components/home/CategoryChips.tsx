@@ -1,20 +1,25 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { LayoutSection } from '../../types/config';
+import {
+  LayoutSection,
+  LocalizedText,
+  SupportedLanguage,
+} from '../../types/config';
 import { AppTheme } from '../../theme/createTheme';
 
 interface CategoryItem {
   id: string;
-  label: string;
+  label: LocalizedText;
 }
 
 interface CategoryChipsProps {
   section: LayoutSection;
   theme: AppTheme;
+  language: SupportedLanguage;
 }
 
-function CategoryChips({ section, theme }: CategoryChipsProps) {
+function CategoryChips({ section, theme, language }: CategoryChipsProps) {
   const items = section.items as CategoryItem[];
 
   return (
@@ -29,7 +34,7 @@ function CategoryChips({ section, theme }: CategoryChipsProps) {
           },
         ]}
       >
-        {section.title}
+        {section.title[language]}
       </Text>
 
       <FlatList
@@ -59,7 +64,7 @@ function CategoryChips({ section, theme }: CategoryChipsProps) {
                 fontSize: theme.typography.body,
               }}
             >
-              {item.label}
+              {item.label[language]}
             </Text>
           </View>
         )}
