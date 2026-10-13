@@ -14,6 +14,8 @@ import DateSelectionScreen from '../screens/DateSelectionScreen';
 import BookingConfirmationScreen from '../screens/BookingConfirmationScreen';
 import BookingSuccessScreen from '../screens/BookingSuccessScreen';
 import { Slot } from '../types/booking';
+import PrescriptionsScreen from '../screens/PrescriptionsScreen';
+import PrescriptionDetailScreen from '../screens/PrescriptionDetailScreen';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -26,16 +28,19 @@ export type RootStackParamList = {
     slot: Slot;
   };
   BookingSuccess: undefined;
+  PrescriptionDetail: {
+    prescriptionId: string;
+  };
 };
 
 export type MainTabParamList = {
   Home: undefined;
+  Prescriptions: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
-
 function MainTabs() {
   const config = useConfigStore(state => state.config);
 
@@ -55,6 +60,10 @@ function MainTabs() {
 
   const homeTab = config.tabs.find(tab => tab.screen === 'home');
 
+  const prescriptionsTab = config.tabs.find(
+    tab => tab.screen === 'prescriptions',
+  );
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -67,6 +76,16 @@ function MainTabs() {
           component={HomeScreen}
           options={{
             tabBarLabel: homeTab.label,
+          }}
+        />
+      ) : null}
+
+      {prescriptionsTab ? (
+        <Tab.Screen
+          name="Prescriptions"
+          component={PrescriptionsScreen}
+          options={{
+            tabBarLabel: prescriptionsTab.label,
           }}
         />
       ) : null}
@@ -116,6 +135,10 @@ function AppNavigator() {
           component={BookingConfirmationScreen}
         />
         <Stack.Screen name="BookingSuccess" component={BookingSuccessScreen} />
+        <Stack.Screen
+          name="PrescriptionDetail"
+          component={PrescriptionDetailScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

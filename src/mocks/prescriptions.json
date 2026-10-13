@@ -1,0 +1,31 @@
+[
+  {
+    "id": "prescription-1",
+    "issuedAt": "2026-10-12T10:30:00+05:30",
+    "doctorName": "Dr. Ananya Sharma",
+    "clinicName": "Tapza Care Clinic",
+    "medicines": [
+      {
+        "id": "medicine-1",
+        "name": "Paracetamol",
+        "dose": "500 mg",
+        "days": 5,
+        "timing": ["morning", "night"]
+      },
+      {
+        "id": "medicine-2",
+        "name": "Vitamin D3",
+        "dose": "1000 IU",
+        "days": 30,
+        "timing": ["morning"]
+      },
+      {
+        "id": "medicine-3",
+        "name": "Cetirizine",
+        "dose": "10 mg",
+        "days": 5,
+        "timing": ["night"]
+      }
+    ]
+  }
+]
