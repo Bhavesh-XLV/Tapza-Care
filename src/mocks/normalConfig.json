@@ -109,27 +109,7 @@
         }
       ]
     },
-    {
-      "id": "offers",
-      "type": "offer_strip",
-      "background": {
-        "kind": "gradient",
-        "value": "#DBEAFE,#BFDBFE,#93C5FD"
-      },
-      "title": "Special offers",
-      "items": [
-        {
-          "id": "health-check",
-          "title": "Full Body Health Checkup",
-          "subtitle": "Starting from ₹999"
-        },
-        {
-          "id": "consult-offer",
-          "title": "Doctor Consultation",
-          "subtitle": "Get 20% off on your first consultation"
-        }
-      ]
-    },
+
     {
       "id": "services",
       "type": "service_grid",
@@ -194,6 +174,27 @@
           "specialty": "Dermatologist",
           "photoUrl": "https://i.pravatar.cc/300?img=32",
           "feeInr": 699
+        }
+      ]
+    },
+    {
+      "id": "offers",
+      "type": "offer_strip",
+      "background": {
+        "kind": "gradient",
+        "value": "#DBEAFE,#BFDBFE,#93C5FD"
+      },
+      "title": "Special offers",
+      "items": [
+        {
+          "id": "health-check",
+          "title": "Full Body Health Checkup",
+          "subtitle": "Starting from ₹999"
+        },
+        {
+          "id": "consult-offer",
+          "title": "Doctor Consultation",
+          "subtitle": "Get 20% off on your first consultation"
         }
       ]
     }

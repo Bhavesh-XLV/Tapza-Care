@@ -70,6 +70,25 @@ function MainTabs() {
 
   const profileTab = config.tabs.find(tab => tab.screen === 'profile');
 
+  function getTabIcon(icon: string): string {
+    switch (icon) {
+      case 'home':
+        return '⌂';
+
+      case 'calendar':
+        return '▣';
+
+      case 'file':
+        return '▤';
+
+      case 'user':
+        return '●';
+
+      default:
+        return '•';
+    }
+  }
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -82,6 +101,9 @@ function MainTabs() {
           component={HomeScreen}
           options={{
             tabBarLabel: homeTab.label,
+            tabBarIcon: () => (
+              <Text style={{ fontSize: 22 }}>{getTabIcon(homeTab.icon)}</Text>
+            ),
           }}
         />
       ) : null}
@@ -91,6 +113,12 @@ function MainTabs() {
           component={BookingsScreen}
           options={{
             tabBarLabel: bookingsTab.label,
+
+            tabBarIcon: () => (
+              <Text style={{ fontSize: 22 }}>
+                {getTabIcon(bookingsTab.icon)}
+              </Text>
+            ),
           }}
         />
       ) : null}
@@ -100,6 +128,12 @@ function MainTabs() {
           component={PrescriptionsScreen}
           options={{
             tabBarLabel: prescriptionsTab.label,
+
+            tabBarIcon: () => (
+              <Text style={{ fontSize: 22 }}>
+                {getTabIcon(prescriptionsTab.icon)}
+              </Text>
+            ),
           }}
         />
       ) : null}
@@ -109,6 +143,12 @@ function MainTabs() {
           component={ProfileScreen}
           options={{
             tabBarLabel: profileTab.label,
+
+            tabBarIcon: () => (
+              <Text style={{ fontSize: 22 }}>
+                {getTabIcon(profileTab.icon)}
+              </Text>
+            ),
           }}
         />
       ) : null}

@@ -52,27 +52,6 @@
       "items": []
     },
     {
-      "id": "diwali-offers",
-      "type": "offer_strip",
-      "background": {
-        "kind": "gradient",
-        "value": "#FDE68A,#FDBA74,#FCA5A5"
-      },
-      "title": "Diwali Health Offers",
-      "items": [
-        {
-          "id": "diwali-checkup",
-          "title": "Diwali Full Body Checkup",
-          "subtitle": "Starting from ₹799"
-        },
-        {
-          "id": "diwali-consult",
-          "title": "Doctor Consultation",
-          "subtitle": "20% off this Diwali"
-        }
-      ]
-    },
-    {
       "id": "festival-services",
       "type": "service_grid",
       "background": {
@@ -156,6 +135,27 @@
           "specialty": "Cardiologist",
           "photoUrl": "https://i.pravatar.cc/300?img=12",
           "feeInr": 799
+        }
+      ]
+    },
+    {
+      "id": "diwali-offers",
+      "type": "offer_strip",
+      "background": {
+        "kind": "gradient",
+        "value": "#FDE68A,#FDBA74,#FCA5A5"
+      },
+      "title": "Diwali Health Offers",
+      "items": [
+        {
+          "id": "diwali-checkup",
+          "title": "Diwali Full Body Checkup",
+          "subtitle": "Starting from ₹799"
+        },
+        {
+          "id": "diwali-consult",
+          "title": "Doctor Consultation",
+          "subtitle": "20% off this Diwali"
         }
       ]
     }
