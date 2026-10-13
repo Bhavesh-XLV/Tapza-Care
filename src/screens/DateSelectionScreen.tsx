@@ -13,13 +13,18 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+import type {
+  NativeStackScreenProps,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 
 import { getSlots } from '../api/slotsApi';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { useConfigStore } from '../store/configStore';
 import { createTheme } from '../theme/createTheme';
 import { Slot } from '../types/booking';
+import { useBookingStore } from '../store/bookingStore';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'DateSelection'>;
 
@@ -30,6 +35,9 @@ interface DateItem {
 }
 
 function DateSelectionScreen({ route }: Props) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const { doctorId } = route.params;
 
   const insets = useSafeAreaInsets();
@@ -51,6 +59,8 @@ function DateSelectionScreen({ route }: Props) {
   const snapPoints = useMemo(() => ['35%', '70%'], []);
 
   const theme = config ? createTheme(config.theme) : null;
+
+  const resetBooking = useBookingStore(state => state.resetBooking);
 
   const dates = useMemo<DateItem[]>(() => {
     const result: DateItem[] = [];
@@ -305,40 +315,42 @@ function DateSelectionScreen({ route }: Props) {
       ) : null}
 
       {selectedSlot ? (
-        <View
+        <TouchableOpacity
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel="Confirm appointment"
+          onPress={() => {
+            resetBooking();
+            navigation.navigate('BookingConfirmation', {
+              doctorId,
+
+              slot: selectedSlot,
+            });
+          }}
           style={[
-            styles.selectedSlotCard,
+            styles.confirmButton,
+
             {
-              backgroundColor: theme.colors.surface,
+              backgroundColor: theme.colors.primary,
+
               borderRadius: theme.radius.md,
+
               marginTop: theme.spacing.md,
-              padding: theme.spacing.md,
             },
           ]}
         >
           <Text
             style={{
-              color: theme.colors.textSecondary,
-              fontSize: theme.typography.caption,
-            }}
-          >
-            Selected time
-          </Text>
+              color: '#FFFFFF',
 
-          <Text
-            style={{
-              color: theme.colors.textPrimary,
-              fontSize: theme.typography.heading,
+              fontSize: theme.typography.body,
+
               fontWeight: '700',
-              marginTop: theme.spacing.xs,
             }}
           >
-            {new Date(selectedSlot.startsAt).toLocaleTimeString('en-IN', {
-              hour: 'numeric',
-              minute: '2-digit',
-            })}
+            Continue to confirmation
           </Text>
-        </View>
+        </TouchableOpacity>
       ) : null}
 
       <BottomSheet
@@ -476,6 +488,13 @@ const styles = StyleSheet.create({
 
   sheetSlot: {
     minHeight: 52,
+    justifyContent: 'center',
+  },
+  confirmButton: {
+    minHeight: 48,
+
+    alignItems: 'center',
+
     justifyContent: 'center',
   },
 });

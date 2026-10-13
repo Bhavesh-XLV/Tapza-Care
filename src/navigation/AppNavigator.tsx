@@ -11,6 +11,9 @@ import { useConfigStore } from '../store/configStore';
 import HomeScreen from '../screens/HomeScreen';
 import DoctorSelectionScreen from '../screens/DoctorSelectionScreen';
 import DateSelectionScreen from '../screens/DateSelectionScreen';
+import BookingConfirmationScreen from '../screens/BookingConfirmationScreen';
+import BookingSuccessScreen from '../screens/BookingSuccessScreen';
+import { Slot } from '../types/booking';
 
 export type RootStackParamList = {
   Main: undefined;
@@ -18,6 +21,11 @@ export type RootStackParamList = {
   DateSelection: {
     doctorId: string;
   };
+  BookingConfirmation: {
+    doctorId: string;
+    slot: Slot;
+  };
+  BookingSuccess: undefined;
 };
 
 export type MainTabParamList = {
@@ -103,6 +111,11 @@ function AppNavigator() {
           component={DoctorSelectionScreen}
         />
         <Stack.Screen name="DateSelection" component={DateSelectionScreen} />
+        <Stack.Screen
+          name="BookingConfirmation"
+          component={BookingConfirmationScreen}
+        />
+        <Stack.Screen name="BookingSuccess" component={BookingSuccessScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
