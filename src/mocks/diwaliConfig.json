@@ -1,0 +1,163 @@
+{
+  "version": 2,
+  "theme": {
+    "primary": "#B91C1C",
+    "secondary": "#FEF3C7",
+    "background": "#FFF7ED",
+    "surface": "#FFFFFF",
+    "textPrimary": "#431407",
+    "textSecondary": "#7C2D12",
+    "accent": "#D97706",
+    "festival": {
+      "name": "Diwali",
+      "greeting": "Happy Diwali",
+      "bannerImageUrl": "https://images.unsplash.com/photo-1605201200809-7c8a4c8a3c1f"
+    }
+  },
+  "tabs": [
+    {
+      "id": "home",
+      "label": "Home",
+      "icon": "home",
+      "screen": "home"
+    },
+    {
+      "id": "bookings",
+      "label": "Bookings",
+      "icon": "calendar",
+      "screen": "bookings"
+    },
+    {
+      "id": "prescriptions",
+      "label": "Prescriptions",
+      "icon": "file",
+      "screen": "prescriptions"
+    },
+    {
+      "id": "profile",
+      "label": "Profile",
+      "icon": "user",
+      "screen": "profile"
+    }
+  ],
+  "sections": [
+    {
+      "id": "festival-hero",
+      "type": "hero_banner",
+      "background": {
+        "kind": "gradient",
+        "value": "#FEF3C7,#FDBA74,#FB923C"
+      },
+      "title": "Happy Diwali",
+      "items": []
+    },
+    {
+      "id": "diwali-offers",
+      "type": "offer_strip",
+      "background": {
+        "kind": "gradient",
+        "value": "#FDE68A,#FDBA74,#FCA5A5"
+      },
+      "title": "Diwali Health Offers",
+      "items": [
+        {
+          "id": "diwali-checkup",
+          "title": "Diwali Full Body Checkup",
+          "subtitle": "Starting from ₹799"
+        },
+        {
+          "id": "diwali-consult",
+          "title": "Doctor Consultation",
+          "subtitle": "20% off this Diwali"
+        }
+      ]
+    },
+    {
+      "id": "festival-services",
+      "type": "service_grid",
+      "background": {
+        "kind": "color",
+        "value": "#FFF7ED"
+      },
+      "title": "Festival Care",
+      "items": [
+        {
+          "id": "family-checkup",
+          "name": "Family Checkup",
+          "icon": "👨‍👩‍👧",
+          "subtitle": "Care for your family"
+        },
+        {
+          "id": "diabetes-check",
+          "name": "Diabetes Check",
+          "icon": "🩸",
+          "subtitle": "Monitor your health"
+        },
+        {
+          "id": "heart-check",
+          "name": "Heart Checkup",
+          "icon": "❤️",
+          "subtitle": "Keep your heart healthy"
+        }
+      ]
+    },
+    {
+      "id": "categories",
+      "type": "category_chips",
+      "background": {
+        "kind": "color",
+        "value": "#FFF7ED"
+      },
+      "title": "Health Services",
+      "items": [
+        {
+          "id": "consult",
+          "label": "Consult"
+        },
+        {
+          "id": "lab",
+          "label": "Lab Tests"
+        },
+        {
+          "id": "pharmacy",
+          "label": "Pharmacy"
+        }
+      ]
+    },
+    {
+      "id": "diwali-unknown",
+      "type": "future_section",
+      "background": {
+        "kind": "color",
+        "value": "#FFF7ED"
+      },
+      "title": "Future Section",
+      "items": []
+    },
+    {
+      "id": "doctors",
+      "type": "doctor_carousel",
+      "background": {
+        "kind": "color",
+        "value": "#FFF7ED"
+      },
+      "title": "Doctors Available",
+      "items": [
+        {
+          "id": "doctor-1",
+          "name": "Dr. Ananya Sharma",
+          "specialty": "General Physician",
+          "photoUrl": "https://i.pravatar.cc/300?img=47",
+          "feeInr": 499
+        },
+        {
+          "id": "doctor-2",
+          "name": "Dr. Rahul Mehta",
+          "specialty": "Cardiologist",
+          "photoUrl": "https://i.pravatar.cc/300?img=12",
+          "feeInr": 799
+        }
+      ]
+    }
+  ]
+}

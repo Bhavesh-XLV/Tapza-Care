@@ -13,7 +13,6 @@ export function mockRequest<T>(
   options?: Partial<MockNetworkConfig>,
 ): Promise<T> {
   const latency = options?.latencyMs ?? mockNetwork.latencyMs;
-
   const shouldFail = options?.shouldFail ?? mockNetwork.shouldFail;
 
   return new Promise((resolve, reject) => {

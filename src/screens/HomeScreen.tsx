@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -27,24 +21,6 @@ function HomeScreen() {
   const scrollY = useSharedValue(0);
 
   const { config, isLoading, error } = useConfigStore();
-
-  if (isLoading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator />
-      </View>
-    );
-  }
-
-  if (error || !config) {
-    return (
-      <View style={styles.center}>
-        <Text>{error ?? 'Something went wrong'}</Text>
-      </View>
-    );
-  }
-
-  const theme = createTheme(config.theme);
 
   const animatedHeaderStyle = useAnimatedStyle(() => {
     const height = interpolate(
@@ -86,6 +62,52 @@ function HomeScreen() {
       transform: [{ translateY }, { scale }],
     };
   });
+
+  if (isLoading) {
+    return (
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: '#F5F5F5',
+            paddingTop: insets.top,
+          },
+        ]}
+      >
+        <View style={styles.skeletonHeader} />
+
+        <View style={styles.skeletonSection}>
+          <View style={styles.skeletonTitle} />
+          <View style={styles.skeletonCard} />
+        </View>
+
+        <View style={styles.skeletonSection}>
+          <View style={styles.skeletonTitle} />
+
+          <View style={styles.skeletonRow}>
+            <View style={styles.skeletonSmallCard} />
+            <View style={styles.skeletonSmallCard} />
+            <View style={styles.skeletonSmallCard} />
+          </View>
+        </View>
+
+        <View style={styles.skeletonSection}>
+          <View style={styles.skeletonTitle} />
+          <View style={styles.skeletonCard} />
+        </View>
+      </View>
+    );
+  }
+
+  if (error || !config) {
+    return (
+      <View style={styles.center}>
+        <Text>{error ?? 'Something went wrong'}</Text>
+      </View>
+    );
+  }
+
+  const theme = createTheme(config.theme);
 
   return (
     <View
@@ -156,6 +178,45 @@ const styles = StyleSheet.create({
 
   greeting: {
     fontWeight: '600',
+  },
+
+  skeletonHeader: {
+    height: 24,
+    width: '45%',
+    borderRadius: 8,
+    backgroundColor: '#E5E5E5',
+    marginBottom: 24,
+  },
+
+  skeletonSection: {
+    marginBottom: 24,
+  },
+
+  skeletonTitle: {
+    height: 18,
+    width: '35%',
+    borderRadius: 6,
+    backgroundColor: '#E5E5E5',
+    marginBottom: 12,
+  },
+
+  skeletonCard: {
+    height: 140,
+    width: '100%',
+    borderRadius: 16,
+    backgroundColor: '#E5E5E5',
+  },
+
+  skeletonRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+
+  skeletonSmallCard: {
+    height: 90,
+    flex: 1,
+    borderRadius: 12,
+    backgroundColor: '#E5E5E5',
   },
 });
 
